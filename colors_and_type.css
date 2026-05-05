@@ -1,0 +1,185 @@
+/* ==========================================================================
+   Melbourne Smile Centre — Foundations
+   Modern, contemporary, glassy. Warm bronze accent.
+   Toorak, Melbourne. "excellence every day."
+   ========================================================================== */
+
+/* ----- Fonts -------------------------------------------------------------- */
+/* Display:  Fraunces  — high-contrast didone-flavoured serif, variable weight
+   Editorial italic: Instrument Serif italic — for the cursive 'day' and accents
+   UI / body: Inter — modern grotesk, anchors the contemporary feel
+   Loaded via Google Fonts in HTML.                                          */
+
+:root {
+  /* ----- Color: Brand & Accent ------------------------------------------ */
+  --msc-primary:           #B08754; /* Bronze — warm modern action color */
+  --msc-primary-deep:      #8C6A3F; /* Deep bronze — pressed / heavy text */
+  --msc-primary-focus:     #C99966; /* Honey bronze — focus ring + hover */
+  --msc-primary-soft:      #E8D9C2; /* Sand — chip fills, on-light tints */
+  --msc-primary-on-dark:   #D9B987; /* Champagne — links on dark surfaces */
+
+  /* ----- Color: Surfaces ------------------------------------------------- */
+  --msc-canvas:                   #FAF7F2; /* Warm porcelain — daylight off-white */
+  --msc-canvas-parchment:         #F2EDE4; /* Cream — section break */
+  --msc-canvas-mist:              #F6F1EA; /* Mist — between canvas and parchment */
+  --msc-surface-pearl:            #FFFEFB; /* Near-white card fill */
+  --msc-surface-tile-1:           #1C1A17; /* Espresso — primary dark */
+  --msc-surface-tile-2:           #221F1B; /* Espresso warm */
+  --msc-surface-tile-3:           #14120F; /* Deepest dark */
+  --msc-surface-black:            #0B0A08; /* Near-black, never pure */
+  --msc-surface-glass-light:      rgba(255, 254, 251, 0.62); /* Glass over light bg */
+  --msc-surface-glass-dark:       rgba(28, 26, 23, 0.55);    /* Glass over dark bg */
+  --msc-surface-glass-tint:       rgba(176, 135, 84, 0.10);  /* Bronze-tinted glass */
+  --msc-surface-chip-translucent: rgba(255, 254, 251, 0.55);
+
+  /* ----- Color: Text ----------------------------------------------------- */
+  --msc-ink:            #1F1A14; /* Warm near-black ink */
+  --msc-body:           #2A241D; /* Body — warm coffee-toned ink */
+  --msc-body-on-dark:   #F5EDE0; /* Warm off-white on dark */
+  --msc-body-muted:     #B8AC9A; /* Secondary on dark — warm taupe */
+  --msc-ink-muted-80:   #4A3F33; /* Subhead, pearl button text */
+  --msc-ink-muted-48:   #8A7C6B; /* Disabled, fine-print, captions */
+
+  /* ----- Color: Hairlines ------------------------------------------------ */
+  --msc-divider-soft:  rgba(31, 26, 20, 0.05); /* Pearl ring */
+  --msc-hairline:      rgba(31, 26, 20, 0.10); /* Card 1px border, warm */
+  --msc-hairline-glass: rgba(255, 254, 251, 0.45); /* Inner glass highlight */
+
+  /* ----- Type: Families -------------------------------------------------- */
+  --msc-font-display:   "Fraunces", "Cormorant Garamond", "Times New Roman", serif;
+  --msc-font-editorial: "Instrument Serif", "Fraunces", Georgia, serif;
+  --msc-font-text:      "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* ----- Type scale (size / weight / line-height / tracking) ------------ */
+  /* Display sizes prefer Fraunces — looser tracking, 400-weight, optical opsz. */
+  --msc-fs-hero:        88px;  --msc-lh-hero: 0.96;       --msc-ls-hero: -0.02em;
+  --msc-fs-display-lg:  56px;  --msc-lh-display-lg: 1.04; --msc-ls-display-lg: -0.015em;
+  --msc-fs-display-md:  36px;  --msc-lh-display-md: 1.12; --msc-ls-display-md: -0.01em;
+  --msc-fs-lead:        28px;  --msc-lh-lead: 1.36;       --msc-ls-lead: 0;
+  --msc-fs-lead-airy:   24px;  --msc-lh-lead-airy: 1.5;   --msc-ls-lead-airy: 0;
+  --msc-fs-tagline:     21px;  --msc-lh-tagline: 1.19;    --msc-ls-tagline: 0.231px;
+  --msc-fs-body:        17px;  --msc-lh-body: 1.47;       --msc-ls-body: -0.374px;
+  --msc-fs-dense-link:  17px;  --msc-lh-dense-link: 2.41; --msc-ls-dense-link: 0;
+  --msc-fs-caption:     14px;  --msc-lh-caption: 1.43;    --msc-ls-caption: -0.224px;
+  --msc-fs-button-lg:   18px;  --msc-lh-button-lg: 1.0;   --msc-ls-button-lg: 0;
+  --msc-fs-fine:        12px;  --msc-lh-fine: 1.0;        --msc-ls-fine: -0.12px;
+  --msc-fs-micro:       10px;  --msc-lh-micro: 1.3;       --msc-ls-micro: -0.08px;
+
+  /* ----- Spacing — 8px base, with sub-base nudges ------------------------ */
+  --msc-space-xxs:    4px;
+  --msc-space-xs:     8px;
+  --msc-space-sm:    12px;
+  --msc-space-md:    17px;
+  --msc-space-lg:    24px;
+  --msc-space-xl:    32px;
+  --msc-space-xxl:   48px;
+  --msc-space-section: 80px;
+
+  /* ----- Radius --------------------------------------------------------- */
+  --msc-radius-none: 0;
+  --msc-radius-xs:   5px;
+  --msc-radius-sm:   8px;
+  --msc-radius-md:  11px;
+  --msc-radius-lg:  18px;
+  --msc-radius-pill: 9999px;
+  --msc-radius-full: 50%;
+
+  /* ----- Elevation & glass --------------------------------------------- */
+  --msc-shadow-product:  3px 5px 30px 0 rgba(31, 26, 20, 0.18);
+  --msc-shadow-glass:    0 8px 32px 0 rgba(31, 26, 20, 0.10), inset 0 1px 0 0 rgba(255,254,251,0.55);
+  --msc-shadow-glass-lg: 0 24px 60px -12px rgba(31, 26, 20, 0.18), inset 0 1px 0 0 rgba(255,254,251,0.55);
+  --msc-shadow-bronze:   0 6px 24px -6px rgba(176, 135, 84, 0.45);
+  --msc-frosted-blur:    saturate(160%) blur(22px);
+  --msc-frosted-blur-lg: saturate(180%) blur(40px);
+
+  /* ----- Layout --------------------------------------------------------- */
+  --msc-container-text:    980px;
+  --msc-container-product: 1440px;
+  --msc-nav-height:        44px;
+  --msc-subnav-height:     52px;
+
+  /* ----- Motion --------------------------------------------------------- */
+  --msc-press-scale: 0.95;
+  --msc-ease:        cubic-bezier(0.4, 0, 0.2, 1);
+  --msc-duration:    160ms;
+}
+
+/* ============================================================================
+   Semantic resets — apply foundations to standard HTML elements.
+   These are intentionally light; structural styling lives in components.
+   ============================================================================ */
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--msc-font-text);
+  font-size: var(--msc-fs-body);
+  line-height: var(--msc-lh-body);
+  letter-spacing: var(--msc-ls-body);
+  color: var(--msc-body);
+  background: var(--msc-canvas);
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--msc-font-display);
+  color: var(--msc-ink);
+  font-weight: 400; /* Fraunces looks best at 400-500 for didone feel */
+  margin: 0;
+  font-feature-settings: "ss01" on, "ss02" on;
+}
+
+h1 { font-size: var(--msc-fs-hero);       line-height: var(--msc-lh-hero);       letter-spacing: var(--msc-ls-hero); }
+h2 { font-size: var(--msc-fs-display-lg); line-height: var(--msc-lh-display-lg); letter-spacing: var(--msc-ls-display-lg); }
+h3 { font-size: var(--msc-fs-display-md); line-height: var(--msc-lh-display-md); letter-spacing: var(--msc-ls-display-md); }
+h4 { font-size: var(--msc-fs-tagline);    line-height: var(--msc-lh-tagline);    letter-spacing: var(--msc-ls-tagline); font-weight: 600; }
+h5 { font-size: var(--msc-fs-body);       line-height: var(--msc-lh-body);       letter-spacing: var(--msc-ls-body);    font-weight: 600; }
+h6 { font-size: var(--msc-fs-caption);    line-height: var(--msc-lh-caption);    letter-spacing: var(--msc-ls-caption); font-weight: 600; text-transform: none; }
+
+p { margin: 0 0 var(--msc-space-md); }
+
+small { font-size: var(--msc-fs-fine); letter-spacing: var(--msc-ls-fine); color: var(--msc-ink-muted-48); }
+
+a {
+  color: var(--msc-primary);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+a:focus-visible {
+  outline: 2px solid var(--msc-primary-focus);
+  outline-offset: 2px;
+}
+
+/* On dark surfaces, in-copy links shift to Sky Link Blue. */
+.msc-on-dark a,
+[data-tone="dark"] a {
+  color: var(--msc-primary-on-dark);
+}
+
+/* Utility: tight Apple-cadence display headline */
+.msc-tight { letter-spacing: -0.01em; }
+
+/* ----- Editorial italic helpers -------------------------------------- */
+.msc-editorial { font-family: var(--msc-font-editorial); font-style: italic; font-weight: 400; }
+.msc-bronze    { color: var(--msc-primary); }
+.msc-lowercase { text-transform: lowercase; }
+.msc-tracked   { letter-spacing: 0.18em; text-transform: uppercase; }
+
+/* ----- Glass panel mixin -------------------------------------------- */
+.msc-glass {
+  background: var(--msc-surface-glass-light);
+  backdrop-filter: var(--msc-frosted-blur);
+  -webkit-backdrop-filter: var(--msc-frosted-blur);
+  border: 1px solid var(--msc-hairline-glass);
+  box-shadow: var(--msc-shadow-glass);
+}
+.msc-glass-dark {
+  background: var(--msc-surface-glass-dark);
+  backdrop-filter: var(--msc-frosted-blur);
+  -webkit-backdrop-filter: var(--msc-frosted-blur);
+  border: 1px solid rgba(255,254,251,0.10);
+}
