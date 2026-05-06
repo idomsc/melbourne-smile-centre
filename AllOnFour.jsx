@@ -854,7 +854,7 @@ function RisksSection() {
 /* ── Payment options ────────────────────────────────────────── */
 function PaymentSection({ onBook }) {
   const plans = [
-    { name:"Staged payments",  icon:"📋", tag:"In-house", highlight:true,
+    { name:"Staged payments",  icon:"staged", tag:"In-house", highlight:true,
       desc:"Structured milestone payments across the treatment journey — deposit at planning, balance at surgery, final payment at delivery. No third-party involvement.",
       features:["Deposit to commence","Milestone-based","No interest","Flexible timing"],
     },
