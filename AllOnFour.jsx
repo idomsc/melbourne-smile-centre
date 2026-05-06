@@ -858,7 +858,7 @@ function PaymentSection({ onBook }) {
       desc:"Structured milestone payments across the treatment journey — deposit at planning, balance at surgery, final payment at delivery. No third-party involvement.",
       features:["Deposit to commence","Milestone-based","No interest","Flexible timing"],
     },
-    { name:"DentiCare",        icon:"📅", tag:"Monthly plan", highlight:false,
+    { name:"DentiCare",        icon:"monthly", tag:"Monthly plan", highlight:false,
       desc:"Interest-free monthly payment plans from $25/week. Apply at your first appointment. Approval in minutes. Spread the cost across 12, 18, or 24 months.",
       features:["Interest-free plans","From $25/week","12–24 month terms","Same-day approval"],
     },
