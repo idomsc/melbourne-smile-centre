@@ -900,7 +900,7 @@ function TreatmentGrid({ onNavigate }) {
       {showAllOnFour && implantsTreatment && (
         <AllOnFourSection
           t={implantsTreatment}
-          onOpen={() => openDrawer(implantsTreatment)}
+          onOpen={() => onNavigate && onNavigate("allon4")}
           onBook={() => { onNavigate && onNavigate("contact"); }}
         />
       )}
