@@ -221,10 +221,10 @@ function ArchHero({ onBook }) {
             animation:"aofFadeUp 600ms 360ms ease both",
           }}>
             {[
-              { n:"4",    label:"Implants" },
+              { n:"4–6",  label:"Implants" },
               { n:"1",    label:"Full arch" },
               { n:"1 day",label:"Temporaries" },
-              { n:"25yr", label:"Longevity" },
+              { n:"1",    label:"Practice" },
             ].map(s => (
               <div key={s.label}>
                 <div style={{ fontFamily:"var(--msc-font-display)", fontSize:22, fontWeight:400,
