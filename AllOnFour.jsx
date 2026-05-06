@@ -866,7 +866,7 @@ function PaymentSection({ onBook }) {
       desc:"Apply to access your superannuation early on compassionate grounds for dental treatment that significantly improves quality of life. We provide the clinical documentation.",
       features:["Use your super","Compassionate grounds","We assist with paperwork","Subject to ATO approval"],
     },
-    { name:"TLC Finance",      icon:"💳", tag:"Health finance", highlight:false,
+    { name:"TLC Finance",      icon:"finance", tag:"Health finance", highlight:false,
       desc:"Specialist health finance for larger treatment investments. Flexible repayment terms, competitive rates, and approval available for eligible applicants.",
       features:["Specialist health finance","Flexible repayment","Competitive rates","Online application"],
     },
