@@ -948,7 +948,10 @@ function PaymentSection({ onBook }) {
                     textTransform:"uppercase", fontFamily:"var(--msc-font-text)",
                   }}>Recommended</div>
                 )}
-                <div style={{ fontSize:24, marginBottom:14 }}>{p.icon}</div>
+                <div style={{ width:44, height:44, borderRadius:12, marginBottom:14,
+                  background:"rgba(176,135,84,0.12)", border:"1px solid rgba(176,135,84,0.22)",
+                  display:"flex", alignItems:"center", justifyContent:"center",
+                }}>{PAYMENT_ICONS[p.icon]}</div>
                 <div style={{ fontSize:9, color:"var(--msc-primary-on-dark)", letterSpacing:"0.14em",
                   textTransform:"uppercase", fontWeight:700, fontFamily:"var(--msc-font-text)", marginBottom:6,
                 }}>{p.tag}</div>
