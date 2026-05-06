@@ -540,7 +540,7 @@ function TeamSection({ onNavigate }) {
       background:`radial-gradient(700px 360px at 15% 40%, rgba(176,135,84,0.38), transparent 70%),
                  radial-gradient(500px 280px at 88% 70%, rgba(217,185,135,0.20), transparent 70%),
                  var(--msc-surface-tile-1)`,
-      padding:"120px 32px 100px", overflow:"hidden",
+      padding:"120px 32px 0", overflow:"hidden", position:"relative",
     }}>
       <div className="msc-inner-pad" style={{ maxWidth:1280, margin:"0 auto" }}>
         {/* Header row */}
