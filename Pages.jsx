@@ -419,119 +419,306 @@ function HomePage({ onNavigate }) {
 }
 
 /* ── Team section ───────────────────────────────────────────── */
-function TeamSection() {
-  const dentists = [
-    { photo: "assets/dr-1.png?v=2", name: "Dr George Paltoglou", title: "Principal Dentist · BDSc (Melb.)", bio: "Principal dentist since 1987. Member of the ADA, American Academy of Cosmetic Dentistry, and European Academy of Aesthetic Dentistry. Continues post-graduate studies in cosmetic and aesthetic dentistry in Australia and abroad." },
-    { photo: "assets/dr-2.png?v=2", name: "Dr Ido Landau",        title: "Dentist · MDent BHSC",            bio: "Multiple ADA prize recipient and top La Trobe graduate. Trained in biomimetic dentistry under Dr Pascal Magne and Dr Didier Dietschi. Committed to evidence-based, gentle clinical care." },
-    { photo: "assets/dr-3.png?v=2", name: "Dr Matthew Youssef",   title: "Dentist · MDent BHSC",            bio: "gIDE Master Clinician in Implantology. Specialist in implants, orthodontics, Invisalign, and oral surgery. Founder of Australian Christian Dental Aid. Evidence-based and patient-focused." },
-  ];
-  const hygienists = [
-    { name: "Kanella Tsaconas", title: "Dental Hygienist", photo: "assets/staff-1.png" },
-    { name: "Joyce Harnick",    title: "Dental Hygienist", photo: "assets/staff-2.png" },
-    { name: "Laura Micutz",     title: "Dental Hygienist", photo: "assets/staff-3.png" },
-  ];
-  const support = [
-    { name: "—", title: "Practice Manager",    photo: null },
-    { name: "—", title: "Patient Coordinator", photo: null },
-    { name: "—", title: "Reception",           photo: null },
-  ];
+/* ── Shared dentist data ────────────────────────────────────── */
+const DENTISTS_DATA = [
+  {
+    photo: "assets/dr-1.png?v=2",
+    name: "Dr George Paltoglou",
+    shortTitle: "Principal Dentist",
+    title: "Principal Dentist · BDSc (Melb.)",
+    since: "Practising since 1987",
+    bio: "George has led Melbourne Smile Centre since 1987, building a reputation for cosmetic and aesthetic dentistry that draws patients from across Australia. A member of the American Academy of Cosmetic Dentistry and the European Academy of Aesthetic Dentistry, he continues his post-graduate education internationally — bringing a quietly rigorous standard to every smile he designs.",
+    specialties: ["Cosmetic Dentistry", "Porcelain Veneers", "Aesthetic Smile Design", "Occlusal Rehabilitation"],
+  },
+  {
+    photo: "assets/dr-2.png?v=2",
+    name: "Dr Ido Landau",
+    shortTitle: "Dentist",
+    title: "Dentist · MDent BHSC",
+    since: "Multiple ADA Prize Recipient",
+    bio: "Ido trained in biomimetic dentistry under Dr Pascal Magne and Dr Didier Dietschi — two of the discipline's foremost practitioners. His approach is built on the principle that the best restoration is the one that preserves the most tooth. He brings an evidence-based, unhurried precision to every case, however simple or complex.",
+    specialties: ["Biomimetic Dentistry", "Digital Smile Design", "Ceramic Restorations", "Preventive Care"],
+  },
+  {
+    photo: "assets/dr-3.png?v=2",
+    name: "Dr Matthew Youssef",
+    shortTitle: "Implantologist",
+    title: "Dentist · MDent BHSC",
+    since: "gIDE Master Clinician in Implantology",
+    bio: "Matthew holds a Master Clinician designation from the global Institute of Dental Education (gIDE) — one of the most demanding post-graduate implantology programmes in the world. He performs both surgical placement and prosthetic restoration in-house, eliminating the referral handoff that typically adds months to implant treatment. Outside the practice he founded Australian Christian Dental Aid.",
+    specialties: ["Dental Implants", "All-on-4", "Orthodontics & Invisalign", "Oral Surgery"],
+  },
+];
 
-  return (
-    <section data-nav-theme="dark" className="msc-team-section" style={{
-      background: `radial-gradient(700px 360px at 15% 40%, rgba(176,135,84,0.38), transparent 70%), radial-gradient(500px 280px at 88% 70%, rgba(217,185,135,0.20), transparent 70%), var(--msc-surface-tile-1)`,
-      padding: "120px 32px 100px", overflow: "hidden",
-    }}>
-      <div className="msc-inner-pad" style={{ maxWidth: 1280, margin: "0 auto" }}>
-        <Reveal>
-          <div style={{ marginBottom: 72 }}>
-            <div style={{ fontSize: 11, color: "var(--msc-primary-on-dark)", letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 500, fontFamily: "var(--msc-font-text)", marginBottom: 16 }}>The team</div>
-            <h2 style={{ fontFamily: "var(--msc-font-display)", fontWeight: 400, fontSize: "clamp(40px, 6vw, 72px)", letterSpacing: "-0.018em", lineHeight: 1.02, color: "#fff", textTransform: "lowercase", margin: 0 }}>
-              three dentists.<br/>
-              <span style={{ fontFamily: "var(--msc-font-editorial)", fontStyle: "italic", color: "var(--msc-primary-on-dark)" }}>one</span> studio.
-            </h2>
-          </div>
-        </Reveal>
-        <div className="msc-grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24, marginBottom: 80, alignItems: "stretch" }}>
-          {dentists.map((d, i) => <Reveal key={d.name} delay={i * 80} style={{ height: "100%" }}><DentistCard {...d} /></Reveal>)}
-        </div>
-        <Reveal>
-          <div style={{ borderTop: "1px solid rgba(255,254,251,0.08)", paddingTop: 48, marginBottom: 48 }}>
-            <div style={{ fontSize: 11, color: "var(--msc-body-muted)", letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 500, fontFamily: "var(--msc-font-text)", marginBottom: 32 }}>Hygienists</div>
-            <div className="msc-grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
-              {hygienists.map((s, i) => <Reveal key={s.name} delay={i * 60}><SupportCard {...s} /></Reveal>)}
-            </div>
-          </div>
-        </Reveal>
-        <Reveal>
-          <div style={{ borderTop: "1px solid rgba(255,254,251,0.08)", paddingTop: 48 }}>
-            <div style={{ fontSize: 11, color: "var(--msc-body-muted)", letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 500, fontFamily: "var(--msc-font-text)", marginBottom: 32 }}>Support team</div>
-            <div className="msc-grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
-              {support.map((s, i) => <Reveal key={s.title} delay={i * 60}><SupportCard {...s} /></Reveal>)}
-            </div>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
+const HYGIENISTS_DATA = [
+  { name: "Kanella Tsaconas", title: "Dental Hygienist", photo: "assets/staff-1.png" },
+  { name: "Joyce Harnick",    title: "Dental Hygienist", photo: "assets/staff-2.png" },
+  { name: "Laura Micutz",     title: "Dental Hygienist", photo: "assets/staff-3.png" },
+];
+const SUPPORT_DATA = [
+  { name: "—", title: "Practice Manager",    photo: null },
+  { name: "—", title: "Patient Coordinator", photo: null },
+  { name: "—", title: "Reception",           photo: null },
+];
 
-function DentistCard({ photo, name, title, bio }) {
+/* ── Home: teaser cards ─────────────────────────────────────── */
+function DentistCardTeaser({ photo, name, shortTitle, onNavigate }) {
+  const [hovered, setHovered] = usePagesState(false);
   return (
-    <div className="hover-glow" style={{
-      background: "var(--msc-surface-glass-dark)",
-      backdropFilter: "var(--msc-frosted-blur)", WebkitBackdropFilter: "var(--msc-frosted-blur)",
-      border: "1px solid rgba(255,254,251,0.08)", borderRadius: 18, overflow: "hidden",
-      display: "flex", flexDirection: "column", height: "100%",
-    }}>
-      {/* Photo — square crop, constrained height */}
+    <div
+      className="hover-scale"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{ position:"relative", borderRadius:20, overflow:"hidden", cursor:"pointer",
+        aspectRatio:"3/4", background:"rgba(20,18,15,0.85)",
+        boxShadow: hovered ? "0 24px 56px -12px rgba(0,0,0,0.55)" : "0 8px 32px -8px rgba(0,0,0,0.35)",
+        transition:"box-shadow 400ms ease",
+      }}
+      onClick={() => onNavigate && onNavigate("team")}
+    >
+      {/* Photo */}
+      <img src={photo} alt={name} style={{
+        position:"absolute", inset:0, width:"100%", height:"100%",
+        objectFit:"cover", objectPosition:"top center",
+        mixBlendMode:"lighten",
+        transform: hovered ? "scale(1.04)" : "scale(1)",
+        transition:"transform 600ms cubic-bezier(0.4,0,0.2,1)",
+      }} onError={(e) => { e.target.style.display = "none"; }} />
+
+      {/* Gradient */}
       <div style={{
-        aspectRatio: "1/1", maxHeight: 260,
-        background: "rgba(28,26,23,0.60)", overflow: "hidden", position: "relative", flexShrink: 0,
+        position:"absolute", inset:0,
+        background: hovered
+          ? "linear-gradient(0deg, rgba(14,12,9,0.92) 0%, rgba(14,12,9,0.35) 55%, transparent 100%)"
+          : "linear-gradient(0deg, rgba(14,12,9,0.85) 0%, rgba(14,12,9,0.25) 50%, transparent 100%)",
+        transition:"background 400ms ease",
+      }} />
+
+      {/* Name + title */}
+      <div style={{
+        position:"absolute", bottom:0, left:0, right:0, padding:"24px 22px",
+        transform: hovered ? "translateY(-44px)" : "translateY(0)",
+        transition:"transform 360ms cubic-bezier(0.4,0,0.2,1)",
       }}>
-        <img src={photo} alt={name} style={{
-          width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center",
-          mixBlendMode: "lighten",
-        }} onError={(e) => { e.target.style.display = "none"; }} />
-        <div style={{
-          position: "absolute", bottom: 0, left: 0, right: 0, height: "35%",
-          background: "linear-gradient(0deg, rgba(20,18,15,0.80), transparent)",
-          pointerEvents: "none",
-        }} />
+        <div style={{ fontSize:10, color:"var(--msc-primary-on-dark)", letterSpacing:"0.16em",
+          textTransform:"uppercase", fontWeight:700, fontFamily:"var(--msc-font-text)", marginBottom:6,
+          opacity: hovered ? 1 : 0.7, transition:"opacity 300ms ease",
+        }}>{shortTitle}</div>
+        <div style={{ fontFamily:"var(--msc-font-display)", fontSize:"clamp(18px,2.2vw,24px)",
+          fontWeight:400, color:"#fff", letterSpacing:"-0.01em", lineHeight:1.1 }}>{name}</div>
       </div>
 
-      {/* Text */}
-      <div style={{ padding: "20px 22px 24px", display: "flex", flexDirection: "column", flex: 1 }}>
-        <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 4, flexWrap: "wrap" }}>
-          <span style={{ fontFamily: "var(--msc-font-display)", fontSize: 20, fontWeight: 400,
-            color: "#fff", letterSpacing: "-0.01em" }}>{name}</span>
-        </div>
-        <div style={{ fontSize: 10, color: "var(--msc-primary-on-dark)", letterSpacing: "0.14em",
-          textTransform: "uppercase", fontWeight: 600, fontFamily: "var(--msc-font-text)", marginBottom: 10 }}>{title}</div>
-        <p style={{ fontSize: 13, color: "var(--msc-body-muted)", lineHeight: 1.65, margin: 0, flex: 1 }}>{bio}</p>
+      {/* "Get to know" button — slides up on hover */}
+      <div style={{
+        position:"absolute", bottom:0, left:0, right:0, padding:"0 22px 20px",
+        opacity: hovered ? 1 : 0,
+        transform: hovered ? "translateY(0)" : "translateY(8px)",
+        transition:"opacity 300ms ease, transform 300ms ease",
+      }}>
+        <button onClick={(e) => { e.stopPropagation(); onNavigate && onNavigate("team"); }} style={{
+          display:"inline-flex", alignItems:"center", gap:7,
+          background:"rgba(176,135,84,0.18)", backdropFilter:"blur(8px)",
+          border:"1px solid rgba(176,135,84,0.40)", borderRadius:9999,
+          color:"var(--msc-primary-on-dark)", fontFamily:"var(--msc-font-text)",
+          fontSize:12, fontWeight:600, letterSpacing:"0.06em",
+          padding:"8px 16px", cursor:"pointer",
+        }}>
+          Get to know
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M2 6h8M7 3l3 3-3 3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </button>
       </div>
     </div>
   );
 }
 
+/* ── Home: team teaser section ──────────────────────────────── */
+function TeamSection({ onNavigate }) {
+  return (
+    <section data-nav-theme="dark" className="msc-team-section" style={{
+      background:`radial-gradient(700px 360px at 15% 40%, rgba(176,135,84,0.38), transparent 70%),
+                 radial-gradient(500px 280px at 88% 70%, rgba(217,185,135,0.20), transparent 70%),
+                 var(--msc-surface-tile-1)`,
+      padding:"120px 32px 100px", overflow:"hidden",
+    }}>
+      <div className="msc-inner-pad" style={{ maxWidth:1280, margin:"0 auto" }}>
+        {/* Header row */}
+        <div style={{ display:"flex", alignItems:"flex-end", justifyContent:"space-between",
+          flexWrap:"wrap", gap:20, marginBottom:52 }}>
+          <Reveal>
+            <div>
+              <div style={{ fontSize:11, color:"var(--msc-primary-on-dark)", letterSpacing:"0.18em",
+                textTransform:"uppercase", fontWeight:500, fontFamily:"var(--msc-font-text)", marginBottom:16 }}>The team</div>
+              <h2 style={{ fontFamily:"var(--msc-font-display)", fontWeight:400,
+                fontSize:"clamp(40px,6vw,72px)", letterSpacing:"-0.018em",
+                lineHeight:1.02, color:"#fff", textTransform:"lowercase", margin:0 }}>
+                three dentists.<br/>
+                <span style={{ fontFamily:"var(--msc-font-editorial)", fontStyle:"italic",
+                  color:"var(--msc-primary-on-dark)" }}>one</span> studio.
+              </h2>
+            </div>
+          </Reveal>
+          <Reveal delay={120}>
+            <button onClick={() => onNavigate && onNavigate("team")} style={{
+              display:"inline-flex", alignItems:"center", gap:8,
+              background:"transparent", border:"1px solid rgba(217,185,135,0.30)",
+              borderRadius:9999, padding:"11px 22px",
+              color:"rgba(245,237,224,0.65)", fontFamily:"var(--msc-font-text)",
+              fontSize:13, fontWeight:500, cursor:"pointer", letterSpacing:"0.01em",
+              transition:"border-color 200ms ease, color 200ms ease",
+            }}
+            onMouseEnter={e=>{ e.currentTarget.style.borderColor="rgba(217,185,135,0.60)"; e.currentTarget.style.color="#fff"; }}
+            onMouseLeave={e=>{ e.currentTarget.style.borderColor="rgba(217,185,135,0.30)"; e.currentTarget.style.color="rgba(245,237,224,0.65)"; }}
+            >
+              Meet the full team
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                <path d="M2 6.5h9M8 3l3.5 3.5L8 10" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          </Reveal>
+        </div>
+
+        {/* Teaser cards */}
+        <div className="msc-grid-3" style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:18 }}>
+          {DENTISTS_DATA.map((d, i) => (
+            <Reveal key={d.name} delay={i * 90}>
+              <DentistCardTeaser {...d} onNavigate={onNavigate} />
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Team page: full editorial dentist row ──────────────────── */
+function DentistRow({ d, index }) {
+  const ref = usePagesRef(null);
+  const [visible, setVisible] = usePagesState(false);
+  const reversed = index % 2 === 1;
+
+  usePagesEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold: 0.12 });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+
+  const photoAnim = {
+    opacity: visible ? 1 : 0,
+    transform: visible ? "none" : `translateX(${reversed ? "40px" : "-40px"})`,
+    transition:"opacity 700ms cubic-bezier(0.4,0,0.2,1), transform 700ms cubic-bezier(0.4,0,0.2,1)",
+  };
+  const textAnim = {
+    opacity: visible ? 1 : 0,
+    transform: visible ? "none" : `translateX(${reversed ? "-40px" : "40px"})`,
+    transition:"opacity 700ms 120ms cubic-bezier(0.4,0,0.2,1), transform 700ms 120ms cubic-bezier(0.4,0,0.2,1)",
+  };
+
+  return (
+    <div ref={ref} style={{
+      display:"grid", gridTemplateColumns:"1fr 1fr", gap:0,
+      minHeight:560, borderBottom:"1px solid rgba(255,254,251,0.07)",
+    }}>
+      {/* Photo column */}
+      <div style={{ order: reversed ? 2 : 1, overflow:"hidden", position:"relative",
+        background:"rgba(20,18,15,0.90)" }}>
+        <div style={{ ...photoAnim, width:"100%", height:"100%", minHeight:480 }}>
+          <img src={d.photo} alt={d.name} style={{
+            width:"100%", height:"100%", objectFit:"cover",
+            objectPosition:"top center", mixBlendMode:"lighten",
+          }} onError={(e) => { e.target.style.display = "none"; }} />
+          {/* Directional gradient towards text */}
+          <div style={{
+            position:"absolute", inset:0,
+            background: reversed
+              ? "linear-gradient(270deg, rgba(14,12,9,0.60) 0%, transparent 50%)"
+              : "linear-gradient(90deg, rgba(14,12,9,0.60) 0%, transparent 50%)",
+            pointerEvents:"none",
+          }} />
+          {/* Bottom gradient */}
+          <div style={{ position:"absolute", bottom:0, left:0, right:0, height:"30%",
+            background:"linear-gradient(0deg, rgba(14,12,9,0.70), transparent)",
+            pointerEvents:"none" }} />
+          {/* Number watermark */}
+          <div style={{ position:"absolute", top:28, left: reversed ? "auto" : 28, right: reversed ? 28 : "auto",
+            fontFamily:"var(--msc-font-display)", fontSize:"clamp(80px,9vw,140px)",
+            fontWeight:400, color:"rgba(255,254,251,0.05)",
+            letterSpacing:"-0.04em", lineHeight:1, pointerEvents:"none", userSelect:"none",
+          }}>0{index+1}</div>
+        </div>
+      </div>
+
+      {/* Text column */}
+      <div style={{ order: reversed ? 1 : 2,
+        background: index % 2 === 0
+          ? "linear-gradient(135deg, rgba(28,24,18,0.98), rgba(22,19,14,1))"
+          : "linear-gradient(135deg, rgba(24,22,16,0.98), rgba(20,17,12,1))",
+        display:"flex", alignItems:"center",
+        padding:"60px clamp(32px,5vw,72px)",
+      }}>
+        <div style={{ ...textAnim, maxWidth:480, width:"100%" }}>
+          {/* Eyebrow */}
+          <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:24 }}>
+            <div style={{ width:24, height:1, background:"rgba(176,135,84,0.5)" }}/>
+            <span style={{ fontSize:9, color:"var(--msc-primary-on-dark)", letterSpacing:"0.20em",
+              textTransform:"uppercase", fontWeight:700, fontFamily:"var(--msc-font-text)" }}>
+              {d.since}
+            </span>
+          </div>
+
+          {/* Name */}
+          <h2 style={{ fontFamily:"var(--msc-font-display)", fontWeight:400,
+            fontSize:"clamp(32px,4vw,52px)", letterSpacing:"-0.02em",
+            lineHeight:1.05, color:"#fff", textTransform:"lowercase",
+            margin:"0 0 6px" }}>{d.name}</h2>
+          <div style={{ fontSize:11, color:"var(--msc-primary-on-dark)", letterSpacing:"0.14em",
+            textTransform:"uppercase", fontWeight:600, fontFamily:"var(--msc-font-text)",
+            marginBottom:28 }}>{d.shortTitle}</div>
+
+          {/* Bio */}
+          <p style={{ fontSize:15, color:"rgba(245,237,224,0.62)", lineHeight:1.78,
+            margin:"0 0 32px", fontWeight:300 }}>{d.bio}</p>
+
+          {/* Specialty tags */}
+          <div style={{ display:"flex", flexWrap:"wrap", gap:8 }}>
+            {d.specialties.map(s => (
+              <span key={s} style={{
+                padding:"6px 13px", borderRadius:9999,
+                border:"1px solid rgba(176,135,84,0.28)",
+                background:"rgba(176,135,84,0.07)",
+                fontSize:11, color:"var(--msc-primary-on-dark)",
+                fontFamily:"var(--msc-font-text)", fontWeight:500,
+                letterSpacing:"0.04em",
+              }}>{s}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Support card (used on team page) ───────────────────────── */
 function SupportCard({ name, title, photo }) {
   return (
     <div className="hover-glow" style={{
-      display: "flex", alignItems: "center", gap: 16, padding: "18px 20px",
-      background: "rgba(255,254,251,0.04)", border: "1px solid rgba(255,254,251,0.07)", borderRadius: 14,
+      display:"flex", alignItems:"center", gap:16, padding:"18px 20px",
+      background:"rgba(255,254,251,0.04)", border:"1px solid rgba(255,254,251,0.07)", borderRadius:14,
     }}>
       <div style={{
-        width: 52, height: 52, borderRadius: "50%",
-        background: "rgba(176,135,84,0.25)", border: "1px solid rgba(176,135,84,0.35)",
-        overflow: "hidden", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center",
+        width:52, height:52, borderRadius:"50%",
+        background:"rgba(176,135,84,0.25)", border:"1px solid rgba(176,135,84,0.35)",
+        overflow:"hidden", flexShrink:0, display:"flex", alignItems:"center", justifyContent:"center",
       }}>
         {photo
-          ? <img src={photo} alt={name} style={{ width: "100%", height: "100%", objectFit: "cover", mixBlendMode: "lighten" }} />
-          : <span style={{ color: "var(--msc-primary-on-dark)", fontSize: 18, fontFamily: "var(--msc-font-display)" }}>{name.charAt(0)}</span>
+          ? <img src={photo} alt={name} style={{ width:"100%", height:"100%", objectFit:"cover", mixBlendMode:"lighten" }}/>
+          : <span style={{ color:"var(--msc-primary-on-dark)", fontSize:18, fontFamily:"var(--msc-font-display)" }}>{name.charAt(0)}</span>
         }
       </div>
       <div>
-        <div style={{ fontFamily: "var(--msc-font-text)", fontSize: 15, fontWeight: 500, color: "#fff", marginBottom: 2 }}>{name}</div>
-        <div style={{ fontSize: 12, color: "var(--msc-body-muted)", letterSpacing: "0.06em" }}>{title}</div>
+        <div style={{ fontFamily:"var(--msc-font-text)", fontSize:15, fontWeight:500, color:"#fff", marginBottom:2 }}>{name}</div>
+        <div style={{ fontSize:12, color:"var(--msc-body-muted)", letterSpacing:"0.06em" }}>{title}</div>
       </div>
     </div>
   );
