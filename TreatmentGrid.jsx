@@ -862,8 +862,7 @@ function TreatmentGrid({ onNavigate }) {
 
   const visible  = activeCat === "all" ? TREATMENTS : TREATMENTS.filter(t => t.cat === activeCat);
   const featured = activeCat === "all" ? visible.find(t => t.featured) : null;
-  const rest     = (featured ? visible.filter(t => !t.featured) : visible)
-                    .filter(t => showAllOnFour ? t.id !== "implants" : true);
+  const rest     = featured ? visible.filter(t => !t.featured) : visible;
 
   const openDrawer  = (t) => { setSelected(t); document.body.style.overflow="hidden"; };
   const closeDrawer = () =>  { setSelected(null); document.body.style.overflow=""; };
