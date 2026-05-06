@@ -483,14 +483,31 @@ function DentistCard({ photo, name, title, bio }) {
       border: "1px solid rgba(255,254,251,0.08)", borderRadius: 18, overflow: "hidden",
       display: "flex", flexDirection: "column", height: "100%",
     }}>
-      <div style={{ aspectRatio: "3/4", background: "rgba(28,26,23,0.60)", overflow: "hidden", position: "relative", flexShrink: 0 }}>
-        <img src={photo} alt={name} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", mixBlendMode: "lighten" }} onError={(e) => { e.target.style.display = "none"; }} />
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "40%", background: "linear-gradient(0deg, rgba(20,18,15,0.85), transparent)", pointerEvents: "none" }} />
+      {/* Photo — square crop, constrained height */}
+      <div style={{
+        aspectRatio: "1/1", maxHeight: 260,
+        background: "rgba(28,26,23,0.60)", overflow: "hidden", position: "relative", flexShrink: 0,
+      }}>
+        <img src={photo} alt={name} style={{
+          width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center",
+          mixBlendMode: "lighten",
+        }} onError={(e) => { e.target.style.display = "none"; }} />
+        <div style={{
+          position: "absolute", bottom: 0, left: 0, right: 0, height: "35%",
+          background: "linear-gradient(0deg, rgba(20,18,15,0.80), transparent)",
+          pointerEvents: "none",
+        }} />
       </div>
-      <div style={{ padding: "22px 24px 26px", display: "flex", flexDirection: "column", flex: 1 }}>
-        <div style={{ fontFamily: "var(--msc-font-display)", fontSize: 22, fontWeight: 400, color: "#fff", letterSpacing: "-0.01em", marginBottom: 4 }}>{name}</div>
-        <div style={{ fontSize: 11, color: "var(--msc-primary-on-dark)", letterSpacing: "0.14em", textTransform: "uppercase", fontWeight: 500, fontFamily: "var(--msc-font-text)", marginBottom: 12 }}>{title}</div>
-        <p style={{ fontSize: 14, color: "var(--msc-body-muted)", lineHeight: 1.6, margin: 0, flex: 1 }}>{bio}</p>
+
+      {/* Text */}
+      <div style={{ padding: "20px 22px 24px", display: "flex", flexDirection: "column", flex: 1 }}>
+        <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 4, flexWrap: "wrap" }}>
+          <span style={{ fontFamily: "var(--msc-font-display)", fontSize: 20, fontWeight: 400,
+            color: "#fff", letterSpacing: "-0.01em" }}>{name}</span>
+        </div>
+        <div style={{ fontSize: 10, color: "var(--msc-primary-on-dark)", letterSpacing: "0.14em",
+          textTransform: "uppercase", fontWeight: 600, fontFamily: "var(--msc-font-text)", marginBottom: 10 }}>{title}</div>
+        <p style={{ fontSize: 13, color: "var(--msc-body-muted)", lineHeight: 1.65, margin: 0, flex: 1 }}>{bio}</p>
       </div>
     </div>
   );
