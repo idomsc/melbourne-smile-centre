@@ -588,7 +588,160 @@ function TeamSection({ onNavigate }) {
           ))}
         </div>
       </div>
+
+      {/* Hygienist horizontal scroll strip */}
+      <HygienistStrip onNavigate={onNavigate} />
     </section>
+  );
+}
+
+function HygienistStrip({ onNavigate }) {
+  const trackRef = usePagesRef(null);
+  const [dragging, setDragging] = usePagesState(false);
+  const [startX, setStartX] = usePagesState(0);
+  const [scrollLeft, setScrollLeft] = usePagesState(0);
+  const [hasScrolled, setHasScrolled] = usePagesState(false);
+
+  const onMouseDown = (e) => {
+    setDragging(true);
+    setStartX(e.pageX - trackRef.current.offsetLeft);
+    setScrollLeft(trackRef.current.scrollLeft);
+  };
+  const onMouseMove = (e) => {
+    if (!dragging) return;
+    e.preventDefault();
+    const x = e.pageX - trackRef.current.offsetLeft;
+    trackRef.current.scrollLeft = scrollLeft - (x - startX);
+    setHasScrolled(true);
+  };
+  const onMouseUp   = () => setDragging(false);
+  const onTouchMove = (e) => {
+    if (!trackRef.current) return;
+    trackRef.current.scrollLeft -= e.touches[0].clientX - startX;
+    setStartX(e.touches[0].clientX);
+    setHasScrolled(true);
+  };
+
+  return (
+    <Reveal>
+      <div style={{ maxWidth:1280, margin:"48px auto 0", padding:"0 32px" }}>
+        {/* Section label + drag hint */}
+        <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between",
+          marginBottom:20, flexWrap:"wrap", gap:10 }}>
+          <div style={{ fontSize:10, color:"rgba(245,237,224,0.35)", letterSpacing:"0.16em",
+            textTransform:"uppercase", fontWeight:700, fontFamily:"var(--msc-font-text)" }}>
+            Hygienists
+          </div>
+          {/* Drag cue pill */}
+          <div style={{
+            display:"flex", alignItems:"center", gap:8,
+            padding:"6px 14px", borderRadius:9999,
+            border:"1px solid rgba(255,254,251,0.10)",
+            background:"rgba(255,254,251,0.04)",
+            opacity: hasScrolled ? 0 : 1,
+            transition:"opacity 500ms ease",
+            pointerEvents:"none",
+          }}>
+            {/* Animated hand icon */}
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{
+              animation:"dragHint 1.8s ease-in-out infinite",
+            }}>
+              <path d="M5 2v5M7.5 3v4M10 4v3M2.5 5v3.5C2.5 10.5 4 12 7 12s4.5-1.5 4.5-3.5V7" stroke="rgba(217,185,135,0.65)" strokeWidth="1.2" strokeLinecap="round"/>
+            </svg>
+            <span style={{ fontSize:10, color:"rgba(217,185,135,0.55)", fontFamily:"var(--msc-font-text)",
+              fontWeight:600, letterSpacing:"0.10em", textTransform:"uppercase" }}>drag to explore</span>
+            <svg width="20" height="10" viewBox="0 0 20 10" fill="none">
+              <path d="M1 5h18M14 1l4 4-4 4" stroke="rgba(217,185,135,0.40)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      {/* Inject drag hint keyframe once */}
+      <style>{`@keyframes dragHint { 0%,100%{transform:translateX(0)} 40%{transform:translateX(4px)} 70%{transform:translateX(-3px)} }`}</style>
+
+      {/* Scroll track — bleeds past right edge intentionally */}
+      <div
+        ref={trackRef}
+        onMouseDown={onMouseDown}
+        onMouseMove={onMouseMove}
+        onMouseUp={onMouseUp}
+        onMouseLeave={onMouseUp}
+        onTouchStart={(e) => setStartX(e.touches[0].clientX)}
+        onTouchMove={onTouchMove}
+        style={{
+          display:"flex", gap:14,
+          overflowX:"auto", overflowY:"hidden",
+          cursor: dragging ? "grabbing" : "grab",
+          userSelect:"none", touchAction:"pan-x",
+          paddingLeft:32, paddingBottom:32,
+          /* No scrollbar */
+          scrollbarWidth:"none", msOverflowStyle:"none",
+        }}
+      >
+        {/* Leading spacer aligned with content */}
+        <div style={{ flexShrink:0, width:0 }}/>
+
+        {HYGIENISTS_DATA.map((h, i) => (
+          <div key={h.name} style={{
+            flexShrink:0, width:200, borderRadius:16, overflow:"hidden",
+            background:"rgba(20,18,15,0.85)",
+            border:"1px solid rgba(255,254,251,0.07)",
+            aspectRatio:"3/4", position:"relative",
+            opacity:0, animation:`aofFadeUp 400ms ${i * 80}ms ease both`,
+          }}>
+            {h.photo && (
+              <img src={h.photo} alt={h.name} style={{
+                position:"absolute", inset:0, width:"100%", height:"100%",
+                objectFit:"cover", objectPosition:"top center",
+                mixBlendMode:"lighten",
+              }} onError={(e) => { e.target.style.display="none"; }} />
+            )}
+            <div style={{
+              position:"absolute", inset:0,
+              background:"linear-gradient(0deg, rgba(14,12,9,0.88) 0%, rgba(14,12,9,0.15) 55%, transparent 100%)",
+            }}/>
+            <div style={{ position:"absolute", bottom:0, left:0, right:0, padding:"16px 16px" }}>
+              <div style={{ fontSize:9, color:"var(--msc-primary-on-dark)", letterSpacing:"0.14em",
+                textTransform:"uppercase", fontWeight:700, fontFamily:"var(--msc-font-text)", marginBottom:4,
+                opacity:0.75 }}>Hygienist</div>
+              <div style={{ fontFamily:"var(--msc-font-display)", fontSize:16,
+                fontWeight:400, color:"#fff", letterSpacing:"-0.01em", lineHeight:1.2 }}>{h.name}</div>
+            </div>
+          </div>
+        ))}
+
+        {/* Right fade-out + "see more" card */}
+        <div onClick={() => onNavigate && onNavigate("team")} style={{
+          flexShrink:0, width:160, borderRadius:16,
+          background:"rgba(176,135,84,0.07)", border:"1px solid rgba(176,135,84,0.18)",
+          aspectRatio:"3/4", display:"flex", flexDirection:"column",
+          alignItems:"center", justifyContent:"center", gap:12,
+          cursor:"pointer", padding:"20px",
+        }}>
+          <div style={{ width:40, height:40, borderRadius:"50%",
+            border:"1px solid rgba(176,135,84,0.35)",
+            display:"flex", alignItems:"center", justifyContent:"center" }}>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M2 8h12M9 3l5 5-5 5" stroke="var(--msc-primary-on-dark)" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+          <span style={{ fontSize:11, color:"rgba(217,185,135,0.65)", textAlign:"center",
+            fontFamily:"var(--msc-font-text)", fontWeight:600, letterSpacing:"0.08em",
+            textTransform:"uppercase", lineHeight:1.5 }}>Meet the full team</span>
+        </div>
+
+        {/* Right padding */}
+        <div style={{ flexShrink:0, width:32 }}/>
+      </div>
+
+      {/* Right edge fade gradient overlay */}
+      <div style={{
+        position:"absolute", right:0, top:0, bottom:0, width:120,
+        background:"linear-gradient(270deg, var(--msc-surface-tile-1) 0%, transparent 100%)",
+        pointerEvents:"none",
+      }}/>
+    </Reveal>
   );
 }
 
