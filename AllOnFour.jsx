@@ -852,6 +852,43 @@ function RisksSection() {
 }
 
 /* ── Payment options ────────────────────────────────────────── */
+const PAYMENT_ICONS = {
+  staged: (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="4" width="18" height="16" rx="3" stroke="var(--msc-primary-on-dark)" strokeWidth="1.4" fill="rgba(176,135,84,0.10)"/>
+      <line x1="7" y1="9"  x2="17" y2="9"  stroke="var(--msc-primary-on-dark)" strokeWidth="1.3" strokeLinecap="round" opacity="0.7"/>
+      <line x1="7" y1="13" x2="14" y2="13" stroke="var(--msc-primary-on-dark)" strokeWidth="1.3" strokeLinecap="round" opacity="0.5"/>
+      <line x1="7" y1="17" x2="11" y2="17" stroke="var(--msc-primary-on-dark)" strokeWidth="1.3" strokeLinecap="round" opacity="0.35"/>
+    </svg>
+  ),
+  monthly: (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="5" width="18" height="16" rx="3" stroke="var(--msc-primary-on-dark)" strokeWidth="1.4" fill="rgba(176,135,84,0.10)"/>
+      <line x1="3" y1="10" x2="21" y2="10" stroke="var(--msc-primary-on-dark)" strokeWidth="1.3" opacity="0.5"/>
+      <line x1="8" y1="3" x2="8" y2="7" stroke="var(--msc-primary-on-dark)" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="16" y1="3" x2="16" y2="7" stroke="var(--msc-primary-on-dark)" strokeWidth="1.5" strokeLinecap="round"/>
+      <circle cx="8"  cy="15" r="1.2" fill="var(--msc-primary-on-dark)" opacity="0.7"/>
+      <circle cx="12" cy="15" r="1.2" fill="var(--msc-primary-on-dark)" opacity="0.7"/>
+      <circle cx="16" cy="15" r="1.2" fill="var(--msc-primary-on-dark)" opacity="0.7"/>
+    </svg>
+  ),
+  super: (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M12 3L4 7v5c0 5 4 8.5 8 10 4-1.5 8-5 8-10V7L12 3z" stroke="var(--msc-primary-on-dark)" strokeWidth="1.4" fill="rgba(176,135,84,0.10)" strokeLinejoin="round"/>
+      <path d="M9 12l2 2 4-4" stroke="var(--msc-primary-on-dark)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  ),
+  finance: (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <rect x="2" y="7" width="20" height="13" rx="3" stroke="var(--msc-primary-on-dark)" strokeWidth="1.4" fill="rgba(176,135,84,0.10)"/>
+      <line x1="2" y1="12" x2="22" y2="12" stroke="var(--msc-primary-on-dark)" strokeWidth="1.3" opacity="0.5"/>
+      <rect x="5" y="15" width="5" height="2" rx="1" fill="var(--msc-primary-on-dark)" opacity="0.5"/>
+      <rect x="12" y="15" width="7" height="2" rx="1" fill="var(--msc-primary-on-dark)" opacity="0.3"/>
+      <path d="M9 4.5C9 3.12 10.12 2 11.5 2h1C13.88 2 15 3.12 15 4.5V7H9V4.5z" stroke="var(--msc-primary-on-dark)" strokeWidth="1.3" fill="rgba(176,135,84,0.08)"/>
+    </svg>
+  ),
+};
+
 function PaymentSection({ onBook }) {
   const plans = [
     { name:"Staged payments",  icon:"staged", tag:"In-house", highlight:true,
