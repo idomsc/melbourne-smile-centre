@@ -260,12 +260,55 @@ function ArchHero({ onBook }) {
 }
 
 /* ── What is All-on-4 ───────────────────────────────────────── */
+const OVERVIEW_ICONS = {
+  "What it is": (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <path d="M5 22 C5 12 14 4 23 4" stroke="var(--msc-primary)" strokeWidth="1.6" strokeLinecap="round" fill="none" opacity="0.35"/>
+      <path d="M7 22 C7 13 14 6 21 6" stroke="var(--msc-primary)" strokeWidth="1.4" strokeLinecap="round" fill="none" opacity="0.55"/>
+      <rect x="9" y="8" width="4" height="10" rx="2" stroke="var(--msc-primary)" strokeWidth="1.4" fill="rgba(176,135,84,0.10)"/>
+      <rect x="15" y="8" width="4" height="10" rx="2" stroke="var(--msc-primary)" strokeWidth="1.4" fill="rgba(176,135,84,0.10)"/>
+      <rect x="7" y="18" width="14" height="5" rx="2" stroke="var(--msc-primary)" strokeWidth="1.4" fill="rgba(176,135,84,0.08)"/>
+    </svg>
+  ),
+  "Who it's for": (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <circle cx="14" cy="9" r="5" stroke="var(--msc-primary)" strokeWidth="1.4" fill="rgba(176,135,84,0.08)"/>
+      <path d="M4 26c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="var(--msc-primary)" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
+      <circle cx="21" cy="8" r="3" fill="rgba(176,135,84,0.15)" stroke="var(--msc-primary)" strokeWidth="1.2"/>
+      <path d="M19.5 8l1 1 2-2" stroke="var(--msc-primary)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  ),
+  "Why All-on-4": (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <rect x="3" y="20" width="22" height="5" rx="2" stroke="var(--msc-primary)" strokeWidth="1.4" fill="rgba(176,135,84,0.08)"/>
+      <line x1="8" y1="20" x2="6" y2="8" stroke="var(--msc-primary)" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="20" y1="20" x2="22" y2="8" stroke="var(--msc-primary)" strokeWidth="1.5" strokeLinecap="round"/>
+      <line x1="12" y1="20" x2="12" y2="8" stroke="var(--msc-primary)" strokeWidth="1.5" strokeLinecap="round" opacity="0.5"/>
+      <line x1="16" y1="20" x2="16" y2="8" stroke="var(--msc-primary)" strokeWidth="1.5" strokeLinecap="round" opacity="0.5"/>
+      <circle cx="6" cy="7" r="2.5" fill="var(--msc-primary)" opacity="0.8"/>
+      <circle cx="22" cy="7" r="2.5" fill="var(--msc-primary)" opacity="0.8"/>
+      <circle cx="12" cy="7" r="1.8" stroke="var(--msc-primary)" strokeWidth="1.2" fill="rgba(176,135,84,0.2)" opacity="0.6"/>
+      <circle cx="16" cy="7" r="1.8" stroke="var(--msc-primary)" strokeWidth="1.2" fill="rgba(176,135,84,0.2)" opacity="0.6"/>
+    </svg>
+  ),
+  "In one practice": (
+    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+      <rect x="4" y="10" width="20" height="16" rx="2" stroke="var(--msc-primary)" strokeWidth="1.4" fill="rgba(176,135,84,0.06)"/>
+      <path d="M10 4h8l2 6H8L10 4z" stroke="var(--msc-primary)" strokeWidth="1.4" strokeLinejoin="round" fill="rgba(176,135,84,0.10)"/>
+      <rect x="11" y="17" width="6" height="9" rx="1" stroke="var(--msc-primary)" strokeWidth="1.2" fill="rgba(176,135,84,0.08)"/>
+      <circle cx="9" cy="15" r="1.5" fill="var(--msc-primary)" opacity="0.5"/>
+      <circle cx="19" cy="15" r="1.5" fill="var(--msc-primary)" opacity="0.5"/>
+      <line x1="14" y1="7" x2="14" y2="4" stroke="var(--msc-primary)" strokeWidth="1.2" strokeLinecap="round" opacity="0.6"/>
+    </svg>
+  ),
+};
+
 function ProcedureOverview() {
   const cards = [
-    { icon:"🦷", title:"What it is", body:"Four titanium implants anchor a fixed full-arch prosthesis — eliminating the need for a denture and preserving bone structure that would otherwise resorb." },
-    { icon:"👤", title:"Who it's for", body:"Patients with extensive tooth loss, severe decay, failing dentitions, or those currently wearing full dentures seeking a permanent, fixed alternative." },
-    { icon:"⚡", title:"Why All-on-4", body:"The posterior implants are placed at a 45° angle to maximise contact with available bone — often avoiding the need for bone grafting and significantly shortening treatment timelines." },
-    { icon:"🏥", title:"In one practice", body:"Dr Matthew Youssef — gIDE Master Clinician in Implantology — performs both the surgical placement and prosthetic restoration at Melbourne Smile Centre. No referrals, no hand-offs." },
+    { key:"What it is",    title:"What it is",    body:"Four to six titanium implants anchor a fixed full-arch prosthesis — eliminating the need for a denture and preserving bone structure that would otherwise resorb." },
+    { key:"Who it's for",  title:"Who it's for",  body:"Patients with extensive tooth loss, severe decay, failing dentitions, or those currently wearing full dentures seeking a permanent, fixed alternative." },
+    { key:"Why All-on-4",  title:"Why All-on-4",  body:"Implants are placed at angles optimised for your individual bone anatomy — often avoiding the need for bone grafting and significantly shortening treatment timelines." },
+    { key:"In one practice",title:"In one practice",body:"Dr Matthew Youssef — gIDE Master Clinician in Implantology — performs both the surgical placement and prosthetic restoration at Melbourne Smile Centre. No referrals, no hand-offs." },
   ];
   return (
     <section id="aof-procedure" data-nav-theme="light" style={{
@@ -284,14 +327,20 @@ function ProcedureOverview() {
         </Reveal>
         <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(260px,1fr))", gap:20 }}>
           {cards.map((c, i) => (
-            <Reveal key={c.title} delay={i * 80}>
+            <Reveal key={c.key} delay={i * 80}>
               <div className="hover-glow" style={{
                 padding:"32px 28px", borderRadius:18,
                 background:"rgba(255,254,251,0.85)",
                 border:"1px solid rgba(180,150,110,0.14)",
                 height:"100%",
               }}>
-                <div style={{ fontSize:28, marginBottom:16 }}>{c.icon}</div>
+                <div style={{
+                  width:52, height:52, borderRadius:14, marginBottom:20,
+                  background:"rgba(176,135,84,0.08)", border:"1px solid rgba(176,135,84,0.18)",
+                  display:"flex", alignItems:"center", justifyContent:"center",
+                }}>
+                  {OVERVIEW_ICONS[c.key]}
+                </div>
                 <h3 style={{ fontFamily:"var(--msc-font-display)", fontSize:22, fontWeight:400,
                   color:"var(--msc-ink)", textTransform:"lowercase", margin:"0 0 12px",
                   letterSpacing:"-0.01em" }}>{c.title}</h3>
