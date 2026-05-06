@@ -72,6 +72,80 @@
       transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
       transform-style: preserve-3d;
     }
+
+    /* ── Mobile nav overlay animation ── */
+    @keyframes mobileMenuIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Responsive grid helpers ── */
+
+    /* Tablet: 640–1023px */
+    @media (min-width: 640px) and (max-width: 1023px) {
+      .msc-grid-3       { grid-template-columns: repeat(2, 1fr) !important; }
+      .msc-feat-card    { grid-column: span 2 !important; }
+      .msc-studio-text  { padding: 56px 40px !important; }
+      .msc-hero-overlay { padding: 40px 40px !important; }
+      .msc-treat-pad    { padding-left: 24px !important; padding-right: 24px !important; }
+      .msc-cta-section  { padding-top: 80px !important; padding-bottom: 80px !important; }
+      .msc-team-section { padding: 100px 28px 80px !important; }
+      .msc-aof-grid     { grid-template-columns: 1fr 260px !important; }
+      .msc-aof-stats    { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+
+    /* Mobile: ≤ 639px */
+    @media (max-width: 639px) {
+      /* Grids */
+      .msc-grid-3 { grid-template-columns: 1fr !important; }
+      .msc-grid-2 { grid-template-columns: 1fr !important; }
+
+      /* Featured card */
+      .msc-feat-card {
+        grid-column: span 1 !important;
+        flex-direction: column !important;
+        padding: 32px 24px !important;
+        gap: 20px !important;
+        align-items: flex-start !important;
+      }
+
+      /* Section padding */
+      .msc-studio-text        { padding: 48px 24px !important; }
+      .msc-team-section       { padding: 80px 20px 60px !important; }
+      .msc-contact-outer      { padding: 120px 20px 80px !important; }
+      .msc-treatments-header  { padding: 120px 20px 48px !important; }
+      .msc-cta-section        { padding: 72px 20px !important; }
+      .msc-portfolio-section  { padding-bottom: 72px !important; }
+
+      /* Inner padding */
+      .msc-portfolio-grid { padding-left: 16px !important; padding-right: 16px !important; }
+      .msc-inner-pad      { padding-left: 20px !important; padding-right: 20px !important; }
+      .msc-treat-pad      { padding: 0 16px 72px !important; }
+
+      /* Studio hero */
+      .msc-hero-overlay   { padding: 28px 24px !important; }
+      .msc-studio-img     { min-height: 300px !important; height: 52vw !important; }
+      .msc-studio-minimg  { min-height: 260px !important; }
+
+      /* Accreditation */
+      .msc-accred-wrap     { gap: 20px !important; margin-top: 28px !important; flex-wrap: wrap !important; }
+      .msc-accred-wrap img { height: 58px !important; }
+
+      /* Drawer */
+      .msc-drawer-header  { padding: 24px 20px 20px !important; }
+      .msc-drawer-content { padding: 20px 20px !important; }
+      .msc-drawer-footer  { padding: 16px 20px 24px !important; }
+
+      /* Category pills */
+      .msc-cat-pills { gap: 6px !important; margin-bottom: 32px !important; }
+      .msc-cat-pills button { padding: 8px 16px !important; font-size: 12px !important; }
+
+      /* All-on-4 section */
+      .msc-aof-grid       { grid-template-columns: 1fr !important; }
+      .msc-aof-stats      { grid-template-columns: repeat(2, 1fr) !important; }
+      .msc-aof-journey    { flex-wrap: wrap !important; }
+      .msc-aof-journey-step { min-width: 120px !important; }
+    }
   </style>
 </head>
 <body>
@@ -82,11 +156,11 @@
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
 
   <script type="text/babel" src="Buttons.jsx?v=2"></script>
-  <script type="text/babel" src="Nav.jsx?v=2"></script>
+  <script type="text/babel" src="Nav.jsx?v=3"></script>
   <script type="text/babel" src="Tile.jsx?v=2"></script>
-  <script type="text/babel" src="TreatmentGrid.jsx?v=2"></script>
+  <script type="text/babel" src="TreatmentGrid.jsx?v=7"></script>
   <script type="text/babel" src="Footer.jsx?v=2"></script>
-  <script type="text/babel" src="Pages.jsx?v=2"></script>
+  <script type="text/babel" src="Pages.jsx?v=4"></script>
 
   <script type="text/babel">
     const { useState } = React;

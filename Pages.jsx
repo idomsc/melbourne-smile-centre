@@ -104,7 +104,7 @@ function SmilePortfolio({ onNavigate }) {
     { label: "case 03", treatment: "Composite bonding",    service: "treatments" },
   ];
   return (
-    <section data-nav-theme="light" style={{ background: "var(--msc-canvas)", padding: "0 0 120px" }}>
+    <section data-nav-theme="light" className="msc-portfolio-section" style={{ background: "var(--msc-canvas)", padding: "0 0 120px" }}>
       {/* Hero smile image */}
       <div style={{
         position: "relative", width: "100%", height: "60vh", minHeight: 400,
@@ -142,8 +142,8 @@ function SmilePortfolio({ onNavigate }) {
       </div>
 
       {/* Before/after row */}
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+      <div className="msc-portfolio-grid" style={{ maxWidth: 1280, margin: "0 auto", padding: "28px 32px 0" }}>
+        <div className="msc-grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
           {cases.map((c, i) => (
             <Reveal key={c.label} delay={i * 80}>
               <div className="hover-glow" style={{
@@ -189,7 +189,7 @@ function StudioFeature({ onNavigate }) {
     <section data-nav-theme="dark" style={{ background: "var(--msc-surface-tile-1)", overflow: "hidden" }}>
 
       {/* Full-bleed exterior hero */}
-      <div className="hover-scale" style={{
+      <div className="hover-scale msc-studio-img" style={{
         position: "relative", width: "100%", height: "70vh", minHeight: 480, overflow: "hidden",
       }}>
         <img
@@ -201,7 +201,7 @@ function StudioFeature({ onNavigate }) {
             e.target.style.display = "none";
           }}
         />
-        <div style={{
+        <div className="msc-hero-overlay" style={{
           position: "absolute", inset: 0,
           background: "linear-gradient(180deg, rgba(28,26,23,0.15) 0%, rgba(28,26,23,0.65) 100%)",
           display: "flex", flexDirection: "column", alignItems: "flex-start",
@@ -220,9 +220,9 @@ function StudioFeature({ onNavigate }) {
       </div>
 
       {/* Two-column: sculpture corridor + text */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+      <div className="msc-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
         {/* Photo */}
-        <div className="hover-scale" style={{ position: "relative", overflow: "hidden", minHeight: 520 }}>
+        <div className="hover-scale msc-studio-minimg" style={{ position: "relative", overflow: "hidden", minHeight: 520 }}>
           <img
             src="assets/clinic-2.jpg"
             alt="Sculpture in clinic corridor"
@@ -231,7 +231,7 @@ function StudioFeature({ onNavigate }) {
           />
         </div>
         {/* Text panel */}
-        <div style={{
+        <div className="msc-studio-text" style={{
           padding: "80px 64px", display: "flex", flexDirection: "column",
           justifyContent: "center",
           background: `radial-gradient(600px 400px at 80% 50%, rgba(176,135,84,0.28), transparent 70%), var(--msc-surface-tile-2)`,
@@ -262,7 +262,7 @@ function StudioFeature({ onNavigate }) {
       </div>
 
       {/* Two sculpture detail photos side by side */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
+      <div className="msc-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
         <div className="hover-scale" style={{ overflow: "hidden", aspectRatio: "16/9" }}>
           <img
             src="assets/clinic-1.jpg"
@@ -386,7 +386,7 @@ function HomePage({ onNavigate }) {
       <StudioFeature onNavigate={onNavigate} />
 
       {/* SERVICES */}
-      <section data-nav-theme="light" style={{ background: "linear-gradient(180deg, var(--msc-canvas-mist) 0%, var(--msc-canvas-parchment) 100%)", padding: "120px 24px", textAlign: "center" }}>
+      <section data-nav-theme="light" className="msc-cta-section" style={{ background: "linear-gradient(180deg, var(--msc-canvas-mist) 0%, var(--msc-canvas-parchment) 100%)", padding: "120px 24px", textAlign: "center" }}>
         <Reveal>
           <TileEyebrow>The services</TileEyebrow>
           <TileHeadline>
@@ -401,14 +401,14 @@ function HomePage({ onNavigate }) {
       </section>
 
       {/* ACCREDITATION */}
-      <section data-nav-theme="light" style={{ background: "var(--msc-canvas)", padding: "96px 24px", textAlign: "center" }}>
+      <section data-nav-theme="light" className="msc-cta-section" style={{ background: "var(--msc-canvas)", padding: "96px 24px", textAlign: "center" }}>
         <Reveal>
           <TileEyebrow>Accredited · trusted</TileEyebrow>
           <TileHeadline>
             quietly <span style={{ fontFamily: "var(--msc-font-editorial)", fontStyle: "italic", color: "var(--msc-primary)" }}>credentialled</span>.
           </TileHeadline>
           <TileTagline muted>QIP accredited. ADA member practice. Three decades in Toorak.</TileTagline>
-          <div style={{ display: "flex", gap: 40, justifyContent: "center", marginTop: 40, alignItems: "center" }}>
+          <div className="msc-accred-wrap" style={{ display: "flex", gap: 40, justifyContent: "center", marginTop: 40, alignItems: "center" }}>
             <img src="assets/ada-accreditation.png" alt="QIP Accredited" style={{ height: 88 }} />
             <img src="assets/ada-member.png" alt="ADA Member" style={{ height: 110 }} />
           </div>
@@ -437,11 +437,11 @@ function TeamSection() {
   ];
 
   return (
-    <section data-nav-theme="dark" style={{
+    <section data-nav-theme="dark" className="msc-team-section" style={{
       background: `radial-gradient(700px 360px at 15% 40%, rgba(176,135,84,0.38), transparent 70%), radial-gradient(500px 280px at 88% 70%, rgba(217,185,135,0.20), transparent 70%), var(--msc-surface-tile-1)`,
       padding: "120px 32px 100px", overflow: "hidden",
     }}>
-      <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+      <div className="msc-inner-pad" style={{ maxWidth: 1280, margin: "0 auto" }}>
         <Reveal>
           <div style={{ marginBottom: 72 }}>
             <div style={{ fontSize: 11, color: "var(--msc-primary-on-dark)", letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 500, fontFamily: "var(--msc-font-text)", marginBottom: 16 }}>The team</div>
@@ -451,13 +451,13 @@ function TeamSection() {
             </h2>
           </div>
         </Reveal>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24, marginBottom: 80, alignItems: "stretch" }}>
+        <div className="msc-grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24, marginBottom: 80, alignItems: "stretch" }}>
           {dentists.map((d, i) => <Reveal key={d.name} delay={i * 80} style={{ height: "100%" }}><DentistCard {...d} /></Reveal>)}
         </div>
         <Reveal>
           <div style={{ borderTop: "1px solid rgba(255,254,251,0.08)", paddingTop: 48, marginBottom: 48 }}>
             <div style={{ fontSize: 11, color: "var(--msc-body-muted)", letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 500, fontFamily: "var(--msc-font-text)", marginBottom: 32 }}>Hygienists</div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+            <div className="msc-grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
               {hygienists.map((s, i) => <Reveal key={s.name} delay={i * 60}><SupportCard {...s} /></Reveal>)}
             </div>
           </div>
@@ -465,7 +465,7 @@ function TeamSection() {
         <Reveal>
           <div style={{ borderTop: "1px solid rgba(255,254,251,0.08)", paddingTop: 48 }}>
             <div style={{ fontSize: 11, color: "var(--msc-body-muted)", letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 500, fontFamily: "var(--msc-font-text)", marginBottom: 32 }}>Support team</div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+            <div className="msc-grid-3" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
               {support.map((s, i) => <Reveal key={s.title} delay={i * 60}><SupportCard {...s} /></Reveal>)}
             </div>
           </div>
@@ -524,11 +524,11 @@ function SupportCard({ name, title, photo }) {
 function TreatmentsPage({ onNavigate }) {
   return (
     <>
-      <section data-nav-theme="light" style={{
+      <section data-nav-theme="light" className="msc-treatments-header" style={{
         background: "linear-gradient(180deg, var(--msc-canvas-mist) 0%, var(--msc-canvas-parchment) 100%)",
         padding: "160px 32px 72px",
       }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto" }}>
+        <div className="msc-inner-pad" style={{ maxWidth: 1280, margin: "0 auto" }}>
           <Reveal>
             <div style={{ fontSize: 11, color: "var(--msc-primary)", letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 500, fontFamily: "var(--msc-font-text)", marginBottom: 16 }}>The services</div>
             <h1 style={{
@@ -590,7 +590,7 @@ function ContactPage() {
   ];
 
   return (
-    <section data-nav-theme="light" style={{ background: "linear-gradient(180deg, var(--msc-canvas-mist) 0%, var(--msc-canvas-parchment) 100%)", minHeight: "100vh", padding: "160px 32px 120px" }}>
+    <section data-nav-theme="light" className="msc-contact-outer" style={{ background: "linear-gradient(180deg, var(--msc-canvas-mist) 0%, var(--msc-canvas-parchment) 100%)", minHeight: "100vh", padding: "160px 32px 120px" }}>
       <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         <Reveal>
           <TileEyebrow>Contact</TileEyebrow>
@@ -602,7 +602,7 @@ function ContactPage() {
           </p>
         </Reveal>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, marginTop: 64 }}>
+        <div className="msc-grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, marginTop: 64 }}>
           {/* Form */}
           <Reveal>
             {submitted ? (
