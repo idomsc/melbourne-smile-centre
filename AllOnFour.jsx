@@ -633,97 +633,219 @@ function FAQSection() {
 
 /* ── Risks & considerations ─────────────────────────────────── */
 function RisksSection() {
+  const [activeTab, setActiveTab] = useAOFState("short");
+  const [tabKey, setTabKey] = useAOFState(0);
+  const [openIdx, setOpenIdx] = useAOFState(null);
+  const [filter, setFilter] = useAOFState("all");
+
+  const switchTab = (id) => { setActiveTab(id); setTabKey(k => k+1); setOpenIdx(null); };
+
+  const SEV = {
+    low:    { col:"rgba(100,155,88,0.9)",  bg:"rgba(100,155,88,0.08)",  badge:"Note",     label:"Low risk"      },
+    medium: { col:"rgba(176,135,84,0.95)", bg:"rgba(176,135,84,0.08)", badge:"Consider", label:"Moderate"      },
+    high:   { col:"rgba(190,90,44,0.95)",  bg:"rgba(190,90,44,0.08)",  badge:"Important",label:"Important"     },
+  };
+
   const shortTerm = [
-    { sev:"low",    text:"Post-operative swelling and bruising — expected for 3–5 days, managed with anti-inflammatories and ice." },
-    { sev:"low",    text:"Temporary difficulty eating and speaking — resolves within days as you adapt to the temporary bridge." },
-    { sev:"medium", text:"Infection at implant sites — risk minimised by antibiotic prophylaxis and strict post-operative care instructions." },
-    { sev:"high",   text:"Proximity to the inferior alveolar nerve (lower jaw) — planned carefully using CT imaging; numbness is a rare but recognised risk." },
-    { sev:"high",   text:"Sinus proximity (upper jaw) — managed with pre-surgical sinus assessment; sinus lift may be required in some cases." },
-    { sev:"high",   text:"Implant failure — occurs in 2–5% of cases; failed implants can usually be replaced after a healing period." },
+    { sev:"low",    title:"Post-operative swelling & bruising",
+      body:"Expected for 3–5 days following surgery. Managed with prescribed anti-inflammatories and ice packs.",
+      action:"Apply ice packs 20 min on, 20 off. Take anti-inflammatories regularly for 3–5 days as prescribed." },
+    { sev:"low",    title:"Temporary difficulty eating & speaking",
+      body:"Common in the first days as you adapt to the temporary bridge. Resolves quickly as swelling settles.",
+      action:"Soft diet for 6 weeks. Avoid biting directly on the front of the temporary bridge." },
+    { sev:"medium", title:"Infection at implant sites",
+      body:"Risk is minimised with antibiotic prophylaxis, chlorhexidine rinse, and strict post-operative care.",
+      action:"Complete the full antibiotic course. Use prescribed chlorhexidine rinse twice daily for 2 weeks." },
+    { sev:"medium", title:"Bleeding",
+      body:"Minor bleeding from surgical sites in the first 24 hours is normal. Heavy or prolonged bleeding requires review.",
+      action:"Bite firmly on gauze for 30 minutes. Avoid hot drinks. Contact us immediately if heavy bleeding continues." },
+    { sev:"high",   title:"Inferior alveolar nerve proximity (lower jaw)",
+      body:"Proximity to the nerve is planned carefully via CT imaging. Temporary or, rarely, permanent altered sensation is a recognised risk.",
+      action:"Report any prolonged numbness, tingling, or altered sensation to Dr Youssef immediately." },
+    { sev:"high",   title:"Sinus proximity (upper jaw)",
+      body:"Sinus assessment is standard. A sinus lift may be required. Avoid forceful nose-blowing post-operatively.",
+      action:"Avoid blowing your nose or sneezing forcefully for 2 weeks. Inform Dr Youssef of any sinus pressure or discharge." },
+    { sev:"high",   title:"Implant failure",
+      body:"Occurs in approximately 2–5% of cases, most often in the early healing phase. Failed implants can usually be replaced.",
+      action:"Attend all monitoring appointments. Avoid smoking — the single largest modifiable risk factor for implant failure." },
   ];
+
   const longTerm = [
-    { sev:"low",    text:"Daily maintenance: brushing after every meal, water flosser twice daily, and implant-specific interdental brushes are non-negotiable." },
-    { sev:"medium", text:"6-monthly professional hygiene appointments — tartar and biofilm build up around implants and must be professionally removed." },
-    { sev:"medium", text:"Annual radiographic assessment — bone levels around implants should be monitored yearly to detect any early loss." },
-    { sev:"medium", text:"The prosthetic bridge may require relining or replacement after 10–20 years due to normal wear and changes in jaw structure over time." },
-    { sev:"high",   text:"Peri-implantitis — an infection of the tissue around the implant, similar to gum disease. Risk increases significantly with smoking and poor hygiene." },
-    { sev:"high",   text:"Bone resorption around implants if maintenance lapses — regular professional cleaning and radiographic monitoring are essential, not optional." },
+    { sev:"low",    title:"Daily home maintenance",
+      body:"Brushing after meals, water flossing twice daily, and implant-specific interdental brushes are essential — not optional.",
+      action:"Brush after every meal. Water flosser twice daily. Use interdental brushes at least once daily." },
+    { sev:"medium", title:"6-monthly professional hygiene",
+      body:"Tartar and biofilm accumulate around implant fixtures and must be professionally removed to prevent tissue breakdown.",
+      action:"Book your next hygiene appointment before leaving every visit. Do not defer these appointments." },
+    { sev:"medium", title:"Annual bone level radiographs",
+      body:"Bone levels around implants should be radiographically monitored yearly to detect early marginal bone loss.",
+      action:"Bone level X-rays are taken at each annual review. Never skip this appointment." },
+    { sev:"medium", title:"Prosthesis wear & eventual replacement",
+      body:"The zirconia or acrylic bridge experiences normal wear. Relining or replacement is typically required at 10–20 years.",
+      action:"Budget for prosthesis refresh at 10–15 years. Report any looseness, chipping, or bite changes promptly." },
+    { sev:"high",   title:"Peri-implantitis",
+      body:"An infection of the tissue around the implant — similar to gum disease. Risk rises sharply with smoking, diabetes, and poor hygiene.",
+      action:"If you smoke, cessation is strongly recommended. Report any gum swelling, bleeding, or pain around implants immediately." },
+    { sev:"high",   title:"Progressive bone resorption",
+      body:"If maintenance lapses, bone loss around implants can become irreversible and ultimately compromise implant stability.",
+      action:"Regular professional cleaning and annual radiographic assessment are essential — bone loss cannot be undone once established." },
   ];
-  const sevStyle = {
-    low:    { border:"rgba(100,150,90,0.30)",  bg:"rgba(100,150,90,0.07)",  bar:"rgba(100,150,90,0.8)",  badge:"NOTE"      },
-    medium: { border:"rgba(176,135,84,0.30)",  bg:"rgba(176,135,84,0.07)",  bar:"rgba(176,135,84,0.9)",  badge:"CONSIDER"  },
-    high:   { border:"rgba(185,100,50,0.30)",  bg:"rgba(185,100,50,0.07)",  bar:"rgba(185,100,50,0.9)",  badge:"IMPORTANT" },
-  };
-  const RiskCard = ({ sev, text }) => {
-    const s = sevStyle[sev];
-    return (
-      <div style={{ display:"flex", alignItems:"flex-start", gap:12, padding:"13px 14px",
-        background:s.bg, border:`1px solid ${s.border}`, borderLeft:`3px solid ${s.bar}`,
-        borderRadius:10,
-      }}>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink:0, marginTop:1 }}>
-          <circle cx="8" cy="8" r="7" stroke={s.bar} strokeWidth="1.2"/>
-          <line x1="8" y1="5" x2="8" y2="9.5" stroke={s.bar} strokeWidth="1.5" strokeLinecap="round"/>
-          <circle cx="8" cy="11.5" r="0.85" fill={s.bar}/>
-        </svg>
-        <span style={{ fontSize:13, color:"var(--msc-ink)", lineHeight:1.68, fontWeight:300 }}>{text}</span>
-      </div>
-    );
-  };
+
+  const allData = activeTab === "short" ? shortTerm : longTerm;
+  const visible = filter === "all" ? allData : allData.filter(r => r.sev === filter);
+
   return (
-    <section data-nav-theme="light" style={{
-      background:"linear-gradient(160deg,var(--msc-canvas-mist),var(--msc-canvas-parchment))",
+    <section data-nav-theme="dark" style={{
+      background:"linear-gradient(170deg, #131109 0%, #1D1912 60%, #231E14 100%)",
       padding:"120px 32px",
     }}>
-      <div style={{ maxWidth:1100, margin:"0 auto" }}>
+      <div style={{ maxWidth:860, margin:"0 auto" }}>
+
         <Reveal>
-          <div style={{ fontSize:11, color:"var(--msc-primary)", letterSpacing:"0.18em", textTransform:"uppercase",
+          <div style={{ fontSize:11, color:"var(--msc-primary-on-dark)", letterSpacing:"0.18em", textTransform:"uppercase",
             fontWeight:700, fontFamily:"var(--msc-font-text)", marginBottom:16 }}>Risks & long-term care</div>
           <h2 style={{ fontFamily:"var(--msc-font-display)", fontWeight:400,
             fontSize:"clamp(36px,5vw,60px)", letterSpacing:"-0.02em", lineHeight:1.02,
-            color:"var(--msc-ink)", textTransform:"lowercase", margin:"0 0 16px",
+            color:"#fff", textTransform:"lowercase", margin:"0 0 14px",
           }}>informed, <span style={{ fontFamily:"var(--msc-font-editorial)", fontStyle:"italic",
-            color:"var(--msc-primary)" }}>always</span>.</h2>
-          <p style={{ fontSize:16, fontWeight:300, color:"var(--msc-ink-muted-80)", maxWidth:560, margin:"0 0 56px" }}>
-            We believe an informed patient makes a better patient. Every consideration below is discussed openly at your consultation before any commitment is made.
+            color:"var(--msc-primary-on-dark)" }}>always</span>.</h2>
+          <p style={{ fontSize:16, fontWeight:300, color:"rgba(245,237,224,0.52)", maxWidth:520, margin:"0 0 48px" }}>
+            Every consideration below is discussed openly at your consultation before any commitment is made.
           </p>
         </Reveal>
 
-        {/* Severity legend */}
-        <div style={{ display:"flex", gap:16, marginBottom:36, flexWrap:"wrap" }}>
-          {Object.entries(sevStyle).map(([key, s]) => (
-            <div key={key} style={{ display:"flex", alignItems:"center", gap:6 }}>
-              <div style={{ width:8, height:8, borderRadius:"50%", background:s.bar }}/>
-              <span style={{ fontSize:9, color:"var(--msc-ink-muted-80)", fontFamily:"var(--msc-font-text)",
-                letterSpacing:"0.10em", textTransform:"uppercase", fontWeight:700 }}>{s.badge}</span>
-            </div>
-          ))}
+        {/* Tab switcher */}
+        <Reveal>
+          <div style={{ display:"flex", gap:0, marginBottom:36, position:"relative",
+            background:"rgba(255,254,251,0.05)", borderRadius:12,
+            padding:4, width:"fit-content", border:"1px solid rgba(255,254,251,0.08)",
+          }}>
+            {[
+              { id:"short", label:"Short-term risks", count:shortTerm.length },
+              { id:"long",  label:"Long-term care",   count:longTerm.length  },
+            ].map(tab => (
+              <button key={tab.id} onClick={() => switchTab(tab.id)} style={{
+                padding:"10px 24px", borderRadius:9, border:"none", cursor:"pointer",
+                fontFamily:"var(--msc-font-text)", fontSize:13, fontWeight:600,
+                letterSpacing:"0.01em", transition:"all 220ms ease",
+                background: activeTab === tab.id ? "rgba(176,135,84,0.22)" : "transparent",
+                color: activeTab === tab.id ? "var(--msc-primary-on-dark)" : "rgba(245,237,224,0.40)",
+                boxShadow: activeTab === tab.id ? "0 0 0 1px rgba(176,135,84,0.30)" : "none",
+                display:"flex", alignItems:"center", gap:8,
+              }}>
+                {tab.label}
+                <span style={{
+                  padding:"2px 7px", borderRadius:9999, fontSize:10,
+                  background: activeTab === tab.id ? "rgba(176,135,84,0.30)" : "rgba(255,254,251,0.08)",
+                  color: activeTab === tab.id ? "var(--msc-primary-on-dark)" : "rgba(245,237,224,0.30)",
+                  fontWeight:700,
+                }}>{tab.count}</span>
+              </button>
+            ))}
+          </div>
+        </Reveal>
+
+        {/* Severity filter pills */}
+        <Reveal>
+          <div style={{ display:"flex", gap:8, marginBottom:28, flexWrap:"wrap" }}>
+            {[
+              { id:"all", label:"All", col:"rgba(245,237,224,0.55)" },
+              { id:"low",    label:"Note",      col:SEV.low.col    },
+              { id:"medium", label:"Consider",  col:SEV.medium.col },
+              { id:"high",   label:"Important", col:SEV.high.col   },
+            ].map(f => (
+              <button key={f.id} onClick={() => { setFilter(f.id); setOpenIdx(null); }} style={{
+                padding:"6px 14px", borderRadius:9999, border:"none", cursor:"pointer",
+                fontFamily:"var(--msc-font-text)", fontSize:11, fontWeight:700,
+                letterSpacing:"0.08em", textTransform:"uppercase",
+                transition:"all 200ms ease",
+                background: filter === f.id ? "rgba(255,254,251,0.10)" : "transparent",
+                color: filter === f.id ? f.col : "rgba(245,237,224,0.28)",
+                outline: filter === f.id ? `1px solid ${f.col.replace("0.9","0.35").replace("0.95","0.35")}` : "none",
+              }}>
+                {f.id !== "all" && (
+                  <span style={{ display:"inline-block", width:6, height:6, borderRadius:"50%",
+                    background:f.col, marginRight:6, verticalAlign:"middle" }}/>
+                )}
+                {f.label}
+              </button>
+            ))}
+          </div>
+        </Reveal>
+
+        {/* Risk rows */}
+        <div key={`${activeTab}-${tabKey}`} style={{ display:"flex", flexDirection:"column", gap:2 }}>
+          {visible.map((r, i) => {
+            const s = SEV[r.sev];
+            const isOpen = openIdx === i;
+            return (
+              <div key={i} style={{
+                animation:`aofFadeUp 320ms ${i * 45}ms ease both`,
+                borderRadius:12, overflow:"hidden",
+                background: isOpen ? s.bg : "rgba(255,254,251,0.03)",
+                border:`1px solid ${isOpen ? s.col.replace("0.9","0.22").replace("0.95","0.22") : "rgba(255,254,251,0.07)"}`,
+                transition:"background 260ms ease, border-color 260ms ease",
+              }}>
+                <button onClick={() => setOpenIdx(isOpen ? null : i)} style={{
+                  width:"100%", padding:"17px 20px", display:"flex", alignItems:"center", gap:14,
+                  background:"transparent", border:"none", cursor:"pointer", textAlign:"left",
+                }}>
+                  {/* Severity dot */}
+                  <div style={{
+                    width:8, height:8, borderRadius:"50%", flexShrink:0,
+                    background:s.col, boxShadow:`0 0 8px ${s.col.replace("0.9","0.5").replace("0.95","0.5")}`,
+                  }}/>
+                  {/* Title */}
+                  <span style={{ flex:1, fontFamily:"var(--msc-font-display)", fontSize:17, fontWeight:400,
+                    color:"rgba(245,237,224,0.88)", textTransform:"lowercase", letterSpacing:"-0.01em",
+                    lineHeight:1.3,
+                  }}>{r.title}</span>
+                  {/* Badge */}
+                  <span style={{
+                    padding:"3px 9px", borderRadius:9999, fontSize:9, fontWeight:700,
+                    letterSpacing:"0.10em", textTransform:"uppercase", fontFamily:"var(--msc-font-text)",
+                    background:s.bg, color:s.col, border:`1px solid ${s.col.replace("0.9","0.30").replace("0.95","0.30")}`,
+                    flexShrink:0,
+                  }}>{s.badge}</span>
+                  {/* Chevron */}
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{
+                    flexShrink:0, transition:"transform 260ms ease",
+                    transform: isOpen ? "rotate(180deg)" : "none",
+                  }}>
+                    <path d="M4 6l4 4 4-4" stroke="rgba(245,237,224,0.35)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </button>
+
+                {/* Expanded content */}
+                {isOpen && (
+                  <div style={{ animation:"aofFaqIn 220ms ease both", padding:"0 20px 20px 42px" }}>
+                    <p style={{ fontSize:13.5, color:"rgba(245,237,224,0.62)", lineHeight:1.75,
+                      margin:"0 0 14px", fontWeight:300 }}>{r.body}</p>
+                    <div style={{ display:"flex", alignItems:"flex-start", gap:10,
+                      padding:"12px 14px", borderRadius:9,
+                      background:"rgba(255,254,251,0.05)", border:`1px solid ${s.col.replace("0.9","0.18").replace("0.95","0.18")}`,
+                    }}>
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink:0, marginTop:1 }}>
+                        <path d="M7 1v6M7 10v.5" stroke={s.col} strokeWidth="1.5" strokeLinecap="round"/>
+                        <circle cx="7" cy="7" r="6" stroke={s.col} strokeWidth="1" opacity="0.5"/>
+                      </svg>
+                      <span style={{ fontSize:12, color:s.col, fontWeight:500, lineHeight:1.6,
+                        fontFamily:"var(--msc-font-text)" }}>{r.action}</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
-        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:40 }}>
-          <Reveal>
-            <div>
-              <div style={{ fontSize:10, color:"var(--msc-primary)", letterSpacing:"0.14em", textTransform:"uppercase",
-                fontWeight:700, fontFamily:"var(--msc-font-text)", marginBottom:18, paddingBottom:10,
-                borderBottom:"1px solid var(--msc-hairline)",
-              }}>Short-term considerations</div>
-              <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
-                {shortTerm.map((r, i) => <RiskCard key={i} {...r} />)}
-              </div>
-            </div>
-          </Reveal>
-          <Reveal delay={100}>
-            <div>
-              <div style={{ fontSize:10, color:"var(--msc-primary)", letterSpacing:"0.14em", textTransform:"uppercase",
-                fontWeight:700, fontFamily:"var(--msc-font-text)", marginBottom:18, paddingBottom:10,
-                borderBottom:"1px solid var(--msc-hairline)",
-              }}>Long-term maintenance</div>
-              <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
-                {longTerm.map((r, i) => <RiskCard key={i} {...r} />)}
-              </div>
-            </div>
-          </Reveal>
-        </div>
+        {visible.length === 0 && (
+          <div style={{ padding:"40px 0", textAlign:"center",
+            color:"rgba(245,237,224,0.28)", fontFamily:"var(--msc-font-text)", fontSize:13 }}>
+            No items match the selected filter.
+          </div>
+        )}
+
       </div>
     </section>
   );
