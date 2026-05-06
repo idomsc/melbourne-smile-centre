@@ -111,11 +111,6 @@ function DentalArchSVG() {
         </g>
       ))}
 
-      {/* Angle arrows on posterior implants (showing tilt) */}
-      <line x1="118" y1="162" x2="108" y2="192" stroke="rgba(176,135,84,0.40)" strokeWidth="1.5" strokeLinecap="round"/>
-      <line x1="382" y1="162" x2="392" y2="192" stroke="rgba(176,135,84,0.40)" strokeWidth="1.5" strokeLinecap="round"/>
-      <text x="95" y="205" fontSize="7.5" fill="rgba(176,135,84,0.45)" fontFamily="ui-monospace,monospace">45°</text>
-      <text x="390" y="205" fontSize="7.5" fill="rgba(176,135,84,0.45)" fontFamily="ui-monospace,monospace">45°</text>
     </svg>
   );
 }
