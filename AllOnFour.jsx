@@ -862,7 +862,7 @@ function PaymentSection({ onBook }) {
       desc:"Interest-free monthly payment plans from $25/week. Apply at your first appointment. Approval in minutes. Spread the cost across 12, 18, or 24 months.",
       features:["Interest-free plans","From $25/week","12–24 month terms","Same-day approval"],
     },
-    { name:"SuperCare",        icon:"🏛️", tag:"Super release", highlight:false,
+    { name:"SuperCare",        icon:"super", tag:"Super release", highlight:false,
       desc:"Apply to access your superannuation early on compassionate grounds for dental treatment that significantly improves quality of life. We provide the clinical documentation.",
       features:["Use your super","Compassionate grounds","We assist with paperwork","Subject to ATO approval"],
     },
