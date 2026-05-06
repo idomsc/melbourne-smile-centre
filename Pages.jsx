@@ -896,7 +896,103 @@ function Field({ label, placeholder, type = "text", multiline }) {
   );
 }
 
-function TeamPage()     { return <TeamSection />; }
+function TeamPage({ onNavigate }) {
+  return (
+    <>
+      {/* Hero header */}
+      <section data-nav-theme="dark" style={{
+        background:"linear-gradient(160deg, #110F0C 0%, #1C1814 60%, #211C13 100%)",
+        padding:"160px 32px 96px", position:"relative", overflow:"hidden",
+      }}>
+        <div style={{ position:"absolute", inset:0, pointerEvents:"none",
+          background:"radial-gradient(700px 500px at 10% 80%, rgba(176,135,84,0.22), transparent 65%), radial-gradient(500px 400px at 90% 20%, rgba(217,185,135,0.10), transparent 60%)",
+        }}/>
+        <div style={{ position:"absolute", inset:0, opacity:0.03, pointerEvents:"none",
+          backgroundImage:"linear-gradient(rgba(217,185,135,1) 1px,transparent 1px),linear-gradient(90deg,rgba(217,185,135,1) 1px,transparent 1px)",
+          backgroundSize:"60px 60px",
+        }}/>
+        <div style={{ maxWidth:1280, margin:"0 auto", position:"relative", zIndex:2 }}>
+          <Reveal>
+            <div style={{ fontSize:11, color:"var(--msc-primary-on-dark)", letterSpacing:"0.20em",
+              textTransform:"uppercase", fontWeight:700, fontFamily:"var(--msc-font-text)", marginBottom:20 }}>The team</div>
+            <h1 style={{ fontFamily:"var(--msc-font-display)", fontWeight:400,
+              fontSize:"clamp(52px,8vw,104px)", letterSpacing:"-0.025em",
+              lineHeight:0.94, color:"#fff", textTransform:"lowercase", margin:"0 0 28px" }}>
+              the people<br/>
+              behind your <span style={{ fontFamily:"var(--msc-font-editorial)", fontStyle:"italic",
+                color:"var(--msc-primary-on-dark)" }}>smile</span>.
+            </h1>
+            <p style={{ fontSize:17, fontWeight:300, color:"rgba(245,237,224,0.55)",
+              maxWidth:520, lineHeight:1.72, margin:0 }}>
+              Three dentists. One studio. A shared belief that dentistry done well is barely felt at all.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Dentist editorial rows */}
+      <div style={{ background:"linear-gradient(180deg, #1A1610 0%, #14120E 100%)" }}>
+        {DENTISTS_DATA.map((d, i) => (
+          <DentistRow key={d.name} d={d} index={i} />
+        ))}
+      </div>
+
+      {/* CTA between dentists and support */}
+      <section data-nav-theme="dark" style={{
+        background:"#0E0C09",
+        padding:"72px 32px",
+        textAlign:"center",
+      }}>
+        <Reveal>
+          <p style={{ fontSize:15, color:"rgba(245,237,224,0.45)", fontWeight:300,
+            marginBottom:24, fontFamily:"var(--msc-font-text)" }}>
+            Ready to meet us in person?
+          </p>
+          <button onClick={() => onNavigate && onNavigate("contact")} style={{
+            background:"var(--msc-primary)", color:"#fff", border:"none",
+            borderRadius:9999, padding:"13px 30px",
+            fontSize:14, fontFamily:"var(--msc-font-text)", fontWeight:600,
+            cursor:"pointer", letterSpacing:"0.02em",
+            boxShadow:"0 8px 28px -4px rgba(140,95,40,0.55)",
+            transition:"transform 200ms ease",
+          }}
+          onMouseEnter={e=>{ e.currentTarget.style.transform="translateY(-2px)"; }}
+          onMouseLeave={e=>{ e.currentTarget.style.transform="none"; }}
+          >Book a consultation</button>
+        </Reveal>
+      </section>
+
+      {/* Support staff */}
+      <section data-nav-theme="dark" style={{
+        background:"linear-gradient(180deg, #0E0C09 0%, var(--msc-surface-tile-1) 100%)",
+        padding:"80px 32px 100px",
+      }}>
+        <div style={{ maxWidth:1280, margin:"0 auto" }}>
+          <Reveal>
+            <div style={{ borderBottom:"1px solid rgba(255,254,251,0.07)", paddingBottom:40, marginBottom:48 }}>
+              <div style={{ fontSize:11, color:"var(--msc-primary-on-dark)", letterSpacing:"0.18em",
+                textTransform:"uppercase", fontWeight:700, fontFamily:"var(--msc-font-text)", marginBottom:16 }}>Hygienists</div>
+              <div className="msc-grid-3" style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:16 }}>
+                {HYGIENISTS_DATA.map((s, i) => (
+                  <Reveal key={s.name} delay={i * 60}><SupportCard {...s} /></Reveal>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+          <Reveal>
+            <div style={{ fontSize:11, color:"var(--msc-primary-on-dark)", letterSpacing:"0.18em",
+              textTransform:"uppercase", fontWeight:700, fontFamily:"var(--msc-font-text)", marginBottom:28 }}>Support team</div>
+            <div className="msc-grid-3" style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:16 }}>
+              {SUPPORT_DATA.map((s, i) => (
+                <Reveal key={s.title} delay={i * 60}><SupportCard {...s} /></Reveal>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+    </>
+  );
+}
 function PatientsPage() {
   return (
     <Tile tone="parchment" style={{ padding: "200px 24px 160px" }}>
