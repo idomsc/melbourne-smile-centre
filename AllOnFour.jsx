@@ -180,7 +180,7 @@ function ArchHero({ onBook }) {
             fontSize:"clamp(22px,3vw,34px)", letterSpacing:"-0.018em",
             color:"rgba(245,237,224,0.50)", textTransform:"lowercase", margin:"0 0 28px",
             animation:"aofFadeUp 600ms 140ms ease both",
-          }}>full arch. four implants. one journey.</h2>
+          }}>full arch. fixed forever. one journey.</h2>
 
           <p style={{ fontSize:16, color:"rgba(245,237,224,0.58)", fontWeight:300,
             lineHeight:1.7, margin:"0 0 36px", maxWidth:420,
